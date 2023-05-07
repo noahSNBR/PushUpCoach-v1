@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Lato:ital,wght@1,900&family=Montserrat:ital@1&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(30, 30, 30);
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+
+
+        * {
+            color: yellow;
+            margin: 1vh;
+            font-family: 'Inconsolata', monospace;
+        }
+
+        #header {
+            font-size: 10vh;
+            letter-spacing: 2vw;
+            border-radius: 12px 12px 0px 0px;
+            border: 1px solid yellow;
+            margin: auto;
+            width: 90vw;
+            height: 30vh;
+            background-color: rgb(40, 40, 40);
+        }
+
+        #counter {
+            border: 1px solid yellow;
+            margin: auto;
+            margin-top: 2vh;
+            width: 90vw;
+            height: 30vh;
+            background-color: rgb(40, 40, 40);
+        }
+
+        #counterText {
+            line-height: 30vh;
+            font-size: 15vh;
+        }
+
+        #Headertext {
+            line-height: 30vh;
+        }
+
+        #enterPU {
+            border-radius: 0px 0px 12px 12px;
+            border: 1px solid yellow;
+            height: 30vh;
+            width: 90vw;
+            margin: auto;
+            margin-top: 2vh;
+            background-color: rgb(40, 40, 40);
+            line-height: 30vh;
+        }
+
+        #oneUP,
+        #oneDOWN {
+            font-size: 5vw;
+            height: 20vh;
+            width: 35vw;
+            background-color: rgb(30, 30, 30);
+
+        }
+
+        #oneUP {
+            border: none;
+            color: lime;
+            box-shadow: 0px 0px 20px 5px lime;
+            border-radius: 12px 0px 0px 12px;
+        }
+
+        #oneDOWN {
+            border: none;
+            border-radius: 0px 12px 12px 0px;
+            color: red;
+            box-shadow: 0px 0px 20px 5px red;
+        }
+
+        @media only screen and (max-width: 1110px) {
+            #header {
+                letter-spacing: 0;
+                font-size: 5vh;
+            }
+
+            #oneUP,
+            #oneDOWN {
+                font-size: 20vw;
+                height: 20vh;
+                width: 35vw;
+                background-color: rgb(30, 30, 30);
+
+            }
+
+            #counterText {
+                line-height: 30vh;
+                font-size: 30vh;
+            }
+
+
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <!--Main Part-->
+    <div id="header">
+        <p id="Headertext">Pushups:
+        </p>
+    </div>
+    <div id="counter">
+        <p id="counterText">
+            0
+        </p>
+    </div>
+    <div id="enterPU">
+        <button id="oneUP">+1</button>
+        <button id="oneDOWN">-1</button>
+    </div>
+    <script>
+        //10.02.2023, Noah Saschenbrecker, noahsaschenbrecker@gmx.de >> took my 4 hours <<
+        // +: it's kinda responsive for newer phones wich have at least a width (pixel) of 1110
+        // +: I used a font from google fonts, so the design is not that boring 
+        // +: the score is beeing saved in local storage at every time, you hit a button
+        // -: design isn't the best i've could make, but it's okay, for my first real finished project xD
+        // -: I couldn't really figure out, why it was working surprisenly, but i kept it like it was xD
+
+        //get objects by html (more, but only required are listed here)
+        const counterText = document.getElementById("counterText");
+        const oneUP = document.getElementById("oneUP");
+        const oneDOWN = document.getElementById("oneDOWN");
+        //get score, if score doesn't exist -> create score
+        pushUpScore = localStorage.getItem('pushUpScore')
+        if (pushUpScore == undefined || pushUpScore == null || pushUpScore == NaN) {
+            let pushUpScore = 0;
+        }
+        //render score once, after loaded
+        counterText.innerHTML = pushUpScore
+        //pushup increase by clickevent
+        oneUP.addEventListener('click', function () {
+            pushUpScore++;
+            console.log(pushUpScore)
+            refresh();
+        });
+        //pushup decrease by clickevent
+        oneDOWN.addEventListener('click', function () {
+            pushUpScore--;
+            console.log(pushUpScore)
+            refresh();
+        });
+        //refresh
+        function refresh() {
+            counterText.innerHTML = pushUpScore;
+            //save on refresh data/score
+            localStorage.setItem('pushUpScore', pushUpScore)
+        }
+    </script>
+</body>
+
+</html>
